@@ -8,6 +8,7 @@ const NotFound = () => {
             <Link href='/' className=''>
                 Return home
             </Link>
+       
         </div>
     )
 }

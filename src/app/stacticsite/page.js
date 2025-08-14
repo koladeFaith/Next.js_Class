@@ -1,22 +1,14 @@
-'use client'
-import { useEffect, useState } from 'react';
-const Page = () => {
+import React from 'react'
 
-    const [joke, setJoke] = useState('');
-
-    useEffect(() => {
-        async function fetchJoke() {
-            const res = await fetch('https://api.chucknorris.io/jokes/random')
-            const data = await res.json();
-            setJoke(data.value)
-        }
-        fetchJoke();
-    }, []);
-
+const Page = async () => {
+    // Fetch the joke from the api
+    const res = await fetch('https://api.chucknorris.io/jokes/random', { next: { revalidate: 10000 } })
+    // convert the response from json to a javascript object
+    const fact = await res.json()
     return (
-        <div className=' '>
-            <h1 className='text-center'>Random jokes</h1>
-            <p className='text-center text-5xl text-red-600'>{joke}</p>
+        <div>
+            <h1 className='text-center'>Random Facts</h1>
+            <p className='text-center text-5xl text-red-600'>{fact.value}</p>
         </div>
     )
 }
